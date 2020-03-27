@@ -2,8 +2,6 @@ package com.example.movielibrary.Network;
 
 import com.example.movielibrary.BuildConfig;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.io.IOException;
 import java.sql.Time;
 import java.util.concurrent.TimeUnit;
@@ -38,9 +36,8 @@ public class ApiService {
             okHttpClient.addInterceptor(interceptor());
         }
         okHttpClient.addInterceptor(new Interceptor() {
-            @NotNull
             @Override
-            public Response intercept(@NotNull Chain chain) throws IOException {
+            public Response intercept( Chain chain) throws IOException {
                 Request request = chain.request();
                 HttpUrl url = request.url()
                         .newBuilder()
