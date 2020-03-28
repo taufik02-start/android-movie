@@ -36,12 +36,13 @@ public class PopularActivity extends AppCompatActivity {
 
     private void loadData(){
         apiService = new ApiService();
-        apiService.getPopularMoview(page, new Callback() {
+        apiService.getPopularMovies(page, new Callback() {
             @Override
             public void onResponse(Call call, Response response) {
                 Movie movie = (Movie) response.body();
                 if(movie != null){
                     movieListAdapter.addAll(movie.getResults());
+                    recyclerView.setAdapter(movieListAdapter);
                 }else{
                     Toast.makeText(getBaseContext(),"No Data",Toast.LENGTH_SHORT).show();
                 }

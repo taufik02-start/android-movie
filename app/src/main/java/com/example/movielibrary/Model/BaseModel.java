@@ -19,11 +19,11 @@ public class BaseModel<T> {
         this.page = page;
     }
 
-    public List getResults() {
+    public List<T> getResults() {
         return results;
     }
 
-    public void setResults(List result) {
+    public void setResults(List<T> result) {
         this.results = result;
     }
 }

@@ -1,9 +1,10 @@
 package com.example.movielibrary.Network;
 
 import com.example.movielibrary.BuildConfig;
+import com.example.movielibrary.Model.Movie;
+
 
 import java.io.IOException;
-import java.sql.Time;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.HttpUrl;
@@ -27,8 +28,10 @@ public class ApiService {
                 .build();
         apiinterface = retrofit.create(Apiinterface.class);
     }
+
     private OkHttpClient builder(){
         OkHttpClient.Builder okHttpClient = new OkHttpClient().newBuilder();
+
         okHttpClient.connectTimeout(20, TimeUnit.SECONDS);
         okHttpClient.writeTimeout(20, TimeUnit.SECONDS);
         okHttpClient.readTimeout(20, TimeUnit.SECONDS);
@@ -36,10 +39,11 @@ public class ApiService {
             okHttpClient.addInterceptor(interceptor());
         }
         okHttpClient.addInterceptor(new Interceptor() {
+
             @Override
-            public Response intercept( Chain chain) throws IOException {
-                Request request = chain.request();
-                HttpUrl url = request.url()
+            public Response intercept(Chain chain) throws IOException {
+                Request request =chain.request();
+                HttpUrl url =request.url()
                         .newBuilder()
                         .addQueryParameter("api_key",Constan.API_KEY)
                         .addQueryParameter("language",Constan.LANG_EN)
@@ -55,7 +59,7 @@ public class ApiService {
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
         return interceptor;
     }
-    public void getPopularMoview(int page, Callback callback){
+    public void getPopularMovies(int page, Callback callback) {
         apiinterface.popularMovies(page).enqueue(callback);
     }
 }
